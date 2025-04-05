@@ -3,13 +3,11 @@ import Sheets
 
 # Testing info
 st.write("### 📊 Vista previa de los datos")
+df = Sheets.get_table('Nodol')
+st.dataframe(df)  # Display df
 
-if not Sheets.get_table('Nodol'):
-    st.write("La tabla no se pudo encontrar")
-else:
-    df = Sheets.get_table('Nodol')
-    st.dataframe(df)  # Display df
+# df properties
+st.write("### 🏷️ Columnas disponibles:")
+st.write(df.columns.tolist())
 
-    # df properties
-    st.write("### 🏷️ Columnas disponibles:")
-    st.write(df.columns.tolist())
+selected_sheet = st.selectbox("Selecciona una pestaña 📄", Sheets.get_titles(df))

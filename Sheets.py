@@ -19,14 +19,24 @@ creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
 gc = gspread.authorize(creds)
 
 # Main search function
-def get_table(key: str) -> pd.DataFrame:
+def get_table() -> gspread.spreadsheet.Spreadsheet:
     try:
         spreadsheet = gc.open('Formula')
+        return spreadsheet
+
+    except Exception as e:
+        return e
+
+def get_worksheet(spreadsheet, key) -> pd.DataFrame:  
         sheet = spreadsheet.worksheet(key)  # First Sheets
         data = sheet.get_all_records()  # Get all data **[{}{}]**
         df = pd.DataFrame(data)  # Cast data to Pandas DataFrame
 
         return df
 
-    except Exception as e:
-        return False
+def get_titles(spreadsheet):
+     # Obtener lista de pestañas
+    worksheets = spreadsheet.worksheets()
+    sheet_names = [ws.title for ws in worksheets]
+
+    return sheet_names[4:]
