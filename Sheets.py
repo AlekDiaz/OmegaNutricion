@@ -21,7 +21,7 @@ gc = gspread.authorize(creds)
 # Main search function
 def get_table(key: str) -> pd.DataFrame:
     try:
-        spreadsheet = gc.open('Formulas')
+        spreadsheet = gc.open('Formula')
         sheet = spreadsheet.worksheet(key)  # First Sheets
         data = sheet.get_all_records()  # Get all data **[{}{}]**
         df = pd.DataFrame(data)  # Cast data to Pandas DataFrame
