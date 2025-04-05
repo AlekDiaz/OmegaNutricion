@@ -7,4 +7,4 @@ df = Sheets.get_table()
 
 selected_sheet = st.selectbox("Selecciona una pestaña 📄", Sheets.get_titles(df))
 
-Sheets.get_worksheet(df, selected_sheet)
+st.write(Sheets.get_worksheet(df, selected_sheet))
